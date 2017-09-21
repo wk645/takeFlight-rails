@@ -8,12 +8,13 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def create
-		@user = User.new(username: params[:username], password: params[:password])
+		# byebug
+		@user = User.new(fullname: params[:fullname], email: params[:email], username: params[:username], password: params[:password])
 		if @user.save
 			payload = { user_id: @user.id }
 			render json: { user: @user, jwt: issue_token(payload), success: "Welcome to takeFlight #{@user.username}!" }
 		else
-			render json: {message: "Invalid credentials!"}
+			render json: {message: "Invalid credentials"}
 		end
 	end
 
