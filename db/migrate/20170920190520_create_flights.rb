@@ -3,6 +3,7 @@ class CreateFlights < ActiveRecord::Migration[5.1]
     create_table :flights do |t|
     	t.integer :rank
     	t.string :destination
+    	t.string :airline
     	t.datetime :departureDateTime
     	t.datetime :returnDateTime
     	t.integer :fare

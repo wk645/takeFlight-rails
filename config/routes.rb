@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 			post '/login', to: 'auth#create'
 			get '/flight', to: 'flights#index'
 			get '/flight/:id', to: 'flights#show'
+			post '/flight', to: 'flights#create'
 			# get '/', to: 'flights#index'
 			# get '/flights', to: 'flights#show'
 		end

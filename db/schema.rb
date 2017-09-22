@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20170920190620) do
   create_table "flights", force: :cascade do |t|
     t.integer "rank"
     t.string "destination"
+    t.string "airline"
     t.datetime "departureDateTime"
     t.datetime "returnDateTime"
     t.integer "fare"
