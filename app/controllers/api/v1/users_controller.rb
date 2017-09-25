@@ -2,13 +2,7 @@ class Api::V1::UsersController < ApplicationController
 
 	before_action :authorized, only: [:show]
 
-	def index
-		@users = User.all
-		render json: @users
-	end
-
 	def create
-		# byebug
 		@user = User.new(fullname: params[:fullname], email: params[:email], username: params[:username], password: params[:password])
 		if @user.save
 			payload = { user_id: @user.id }
@@ -19,7 +13,30 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def show
-		render json: { user: current_user }
+		render json: { user: current_user, flights: current_user.flights }
 	end
 
+	def my_flights
+		render json: { flights: current_user.flights, user: current_user }
+	end
+
+	def add_flight
+    # byebug
+
+    user = current_user
+    flight = Flight.find_by(id: params[:flight])
+    # byebug
+    
+    flightObject = {user: user, 
+                    flights: user.flights}
+
+	    if !user.flights.include?(flight)
+	    	user.flights << flight
+	    end
+
+  	render json: flightObject
+
+  end
+
 end
+
