@@ -9,14 +9,14 @@ class Api::V1::FlightsController < ApplicationController
 	end
 
 	def create
-		flightparams = "https://api.test.sabre.com/v2/shop/flights/fares?origin=#{params[:origin]}&departuredate=#{params[:departuredate]}&returndate=#{params[:returndate]}&theme=#{params[:theme]}&maxfare=#{params[:maxfare]}&topdestinations=#{params[:topdestinations]}"
-
+		
+		flightparams = "https://api.test.sabre.com/v2/shop/flights/fares?origin=#{params[:origin]}&departuredate=#{params[:departuredate].split("T")[0]}&returndate=#{params[:returndate].split("T")[0]}&theme=#{params[:theme]}&maxfare=#{params[:maxfare]}&topdestinations=#{params[:topdestinations]}"
 		fetchFlight(flightparams)
 	end
 
 	def fetchFlight(url)
 		headers = {
-        'Authorization' => 'Bearer T1RLAQKQIxO4qNOeiFE/1zDC0BOqHkOETRArl1STWSnakRR6rK/zxZR2AADA5F2CtdzCu1ndeeA+8IZdNJgQwN0CpJ0Rr/du81G/s9BxJmOnRZlub8xq2CyKI34OeEtnhe0VCXzaMC2zOS6Haz+eV4eCKee23cumAOhOtLUQgJ0tiewNezsbk+MVXNXVXszGqqIQ73WhCJr71d37ryWH+5n18kQjOCdYXIQ1bh7gFeqlbsr9pyydAMYPejGSYdwJd778hHkoWWW1RuQyUmm/QCZCPHJHkNivt5exDZ/GOwz9GXsCc4tCW7501LmJ'}
+        'Authorization' => 'Bearer T1RLAQKMe3Nx1UJcTV2OsvFrwmELQPahDhDFDRuBiB+ChWMBGTvU65IQAADAN+B0gHAZ8E1RlFDyL/Y8gtjCJAEGQraKxy193Hu9/UyBZhTBR7DAVZKuLkvle9YV4OW6US6DvehbJfpHd4n9ovup2edPMd4y4JBHZt9/oAFknNfihTU7yh2z8NuGlm67gsvMbbIrSkHHRdAWPNlveSLQ1t0qYXQXQzZBBSRra5j/zcz6r4N6ddX4r9ne9Yxah/h3LGdCsMceejv8T+h690g8PNLpNMcMdSV6L5VHYwBJY3g24JUC0cNORQYUsoe7'}
         # byebug
 		@flight = JSON.parse(RestClient.get(url, headers))["FareInfo"]
 		@savedFlights = @flight.map do |f|
