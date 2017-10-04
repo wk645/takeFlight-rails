@@ -21,11 +21,8 @@ class Api::V1::UsersController < ApplicationController
 	end
 
 	def add_flight
-    # byebug
-
     user = current_user
     flight = Flight.find_by(id: params[:flight])
-    # byebug
     
     flightObject = {user: user, 
                     flights: user.flights}

@@ -10,8 +10,6 @@ Rails.application.routes.draw do
 			post '/add_flight', to: 'users#add_flight'
 			delete '/delete_flight', to: 'saved_flights#destroy'
 			get '/my_flights', to: 'users#my_flights'
-			# get '/', to: 'flights#index'
-			# get '/flights', to: 'flights#show'
 		end
 	end
 end

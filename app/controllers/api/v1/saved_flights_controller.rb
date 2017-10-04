@@ -5,7 +5,6 @@ class Api::V1::SavedFlightsController < ApplicationController
 	end
 
 	def show
-
 	end
 
 	def destroy

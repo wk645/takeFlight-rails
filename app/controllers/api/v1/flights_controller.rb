@@ -16,12 +16,14 @@ class Api::V1::FlightsController < ApplicationController
 
 	def fetchFlight(url)
 		headers = {
-        'Authorization' => 'Bearer T1RLAQKMe3Nx1UJcTV2OsvFrwmELQPahDhDFDRuBiB+ChWMBGTvU65IQAADAN+B0gHAZ8E1RlFDyL/Y8gtjCJAEGQraKxy193Hu9/UyBZhTBR7DAVZKuLkvle9YV4OW6US6DvehbJfpHd4n9ovup2edPMd4y4JBHZt9/oAFknNfihTU7yh2z8NuGlm67gsvMbbIrSkHHRdAWPNlveSLQ1t0qYXQXQzZBBSRra5j/zcz6r4N6ddX4r9ne9Yxah/h3LGdCsMceejv8T+h690g8PNLpNMcMdSV6L5VHYwBJY3g24JUC0cNORQYUsoe7'}
-        # byebug
-		@flight = JSON.parse(RestClient.get(url, headers))["FareInfo"]
+        'Authorization' => 'Bearer T1RLAQLuDBc0Gcs5i2TPIk/HgD9fAEPEwRBFqAj6mhNpdDSrJpinqAPzAADAYR7hxC3aT4fySL+ot3g7JxRdYvFKXGdQsexGxY/DNOlLqe21VS2h48S3LsX06menRjtYcbDmdEC33+UeCx9sU0c6CCqPgzL+6hxC9qYE/sNtVLqI/EUQ+EBi64FDD7/NbA/5zHRSJW6+TaSiIQUx09kgeeRGUWJn/wt7OPYuJ/Hu7x/V9VVqa/may4no5FSIgb7WNJ8vNHaHXJ2NHkSz2SwnpLCp7b7wVE03h4v7mfmIj2dqnbnia/Pj78+W4/JR'}
+     	response = JSON.parse(RestClient.get(url, headers))
+     	@origin = response["OriginLocation"]
+		@flight = response["FareInfo"]
 		@savedFlights = @flight.map do |f|
 			Flight.create(
 				rank: f["DestinationRank"],
+				origin: @origin,
 				destination: f["DestinationLocation"],
 				airline: f["LowestFare"]["AirlineCodes"][0],
 				departureDateTime: f["DepartureDateTime"],
@@ -29,10 +31,7 @@ class Api::V1::FlightsController < ApplicationController
 				fare: f["LowestFare"]["Fare"]
 			)
 		end
-		# byebug
 		render json: @savedFlights
 	end
 
 end
-
-# https://api.test.sabre.com/v2/shop/flights/fares?origin=${from}&departuredate=${departDate}&returndate=${returnDate}&theme=${theme.toUpperCase()}&maxfare=${budget}&topdestinations=${top}
