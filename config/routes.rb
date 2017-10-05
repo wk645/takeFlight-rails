@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 			post '/add_flight', to: 'users#add_flight'
 			delete '/delete_flight', to: 'saved_flights#destroy'
 			get '/my_flights', to: 'users#my_flights'
+			post 'add_picture', to: 'users#add_picture'
 		end
 	end
 end

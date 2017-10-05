@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004202416) do
+ActiveRecord::Schema.define(version: 20171004220025) do
 
   create_table "flights", force: :cascade do |t|
     t.integer "rank"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20171004202416) do
     t.string "email"
     t.string "username"
     t.string "password_digest"
+    t.string "image_url"
   end
 
 end

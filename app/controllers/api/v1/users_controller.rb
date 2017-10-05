@@ -16,6 +16,15 @@ class Api::V1::UsersController < ApplicationController
 		render json: { user: current_user, flights: current_user.flights }
 	end
 
+	def add_picture
+		user = current_user
+		user.image_url = params[:image_url]
+		user.save
+
+		render json: user
+
+	end
+
 	def my_flights
 		render json: { flights: current_user.flights, user: current_user }
 	end
