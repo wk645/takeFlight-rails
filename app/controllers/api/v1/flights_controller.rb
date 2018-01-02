@@ -16,7 +16,7 @@ class Api::V1::FlightsController < ApplicationController
 
 	def fetchFlight(url)
 		headers = {
-        'Authorization' => 'Bearer T1RLAQLcRK9DlILFiGCU44G0IBpaco3glxCzb0i4o1mvzfenukVcXMIyAADANCmsrfO/Gc8snNSjM4jFqHGX6LWjdXgGKFHZ3kGYtBXyrZpX6bON/2gik81+iccYDlyVzZGkjzXuxsfKDMPCvhIftTMeHXdgsE4ncTV+T27zA8CAEDU4VIgIYBI+14vMTO5pn5eVlVL+sJQDlpHBRyfJIh5N9DBq13adkRseH2SWpAhs2sFBO8qQFdUvWMtkOwdS0tcelwBnitm+LWewi6oBv2Ss6QpnJ/OR61oUu/YGo1Sp3WmqJ6IaFqHrvYMx'}
+        'Authorization' => 'Bearer T1RLAQLb3i4GYuElES1BXeV4/D7CicZsURBbdbKcQdvYrObhnJxhHb4/AADASgbOtysy//MQHTbAHfnPa+NCZVJXfBX61LJXP6wEzVttkJvaDegOk01Tsu/Vn/GW+YFSpUE3AzfPhPUCu8kg7cokIC9LhUMG9JLr45d12EyatI8XbGFEKF2iQA1zG1v3fUAwzes0AeQ/A3jL7xjNVncWirIBaBL+kE2DUKFsGevVeDT9LTMNvB9P0pFppsEkEtpxozM++6E+JWhtGItr0QIUC+/euzT2a/t8gPPR/xx5lHk+3dp4mli1yz8ePr+u'}
      	response = JSON.parse(RestClient.get(url, headers))
      	@origin = response["OriginLocation"]
 		@flight = response["FareInfo"]
